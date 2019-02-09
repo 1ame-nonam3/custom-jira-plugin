@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.noname.plugin</groupId>
+    <artifactId>custom-jira-report</artifactId>
+    <version>0.1</version>
+
+    <name>Custom JIRA Plugin</name>
+    <description>Custom reports plugin.</description>
+    <packaging>atlassian-plugin</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.core</groupId>
+            <artifactId>atlassian-core</artifactId>
+            <version>5.0.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-api</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-core</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jira-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <compressResources>false</compressResources>
+                    <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.version}</productDataVersion>
+                    <contextPath>/</contextPath>
+                    <jvmArgs>-Xms256m -Xmx10g -XX:InitialCodeCacheSize=700m -XX:ReservedCodeCacheSize=700m</jvmArgs>
+
+                    <!-- make AMPS faster & enable QuickReload-->
+                    <!-- see https://bitbucket.org/atlassianlabs/quickreload/overview -->
+                    <enableFastdev>false</enableFastdev>
+                    <enableDevToolbox>false</enableDevToolbox>
+                    <enablePde>false</enablePde>
+                    <skipRestDocGeneration>true</skipRestDocGeneration>
+                    <allowGoogleTracking>false</allowGoogleTracking>
+                    <skipManifestValidation>true</skipManifestValidation>
+                    <extractDependencies>false</extractDependencies>
+                    <skipManifestValidation>true</skipManifestValidation>
+
+                    <systemPropertyVariables>
+                        <atlassian.dev.mode>true</atlassian.dev.mode>
+                        <atlassian.mail.senddisabled>false</atlassian.mail.senddisabled>
+                        <atlassian.plugins.enable.wait>3000</atlassian.plugins.enable.wait>
+                    </systemPropertyVariables>
+                    <pluginArtifacts>
+                        <pluginArtifact>
+                            <groupId>com.atlassian.labs.plugins</groupId>
+                            <artifactId>quickreload</artifactId>
+                            <version>1.24.1</version>
+                        </pluginArtifact>
+                    </pluginArtifacts>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <jira.version>7.5.0</jira.version>
+        <amps.version>6.2.4</amps.version>
+    </properties>
+
+    <organization>
+        <name>Noname</name>
+    </organization>
+</project>
