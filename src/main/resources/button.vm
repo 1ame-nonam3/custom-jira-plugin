@@ -1,0 +1,9 @@
+#set ( $d = "$")
+<script language="JavaScript">
+	AJS.${d}(document).ready(() => {
+		AJS.${d}('#cus-butt').click(() => {
+			alert(1);
+		});
+	});
+</script>
+<div id="cus-butt">click me</div>

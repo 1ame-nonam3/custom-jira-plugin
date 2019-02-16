@@ -9,5 +9,169 @@
 
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="custom-jira-plugin"/>
-    
+
+    <!--New admin panel section and button-->
+    <web-section key="test1" name="test1" location="system.admin.top.navigation.bar">
+        <label key="New Admin Menu Button"/>
+    </web-section>
+
+    <web-item key="test2" name="test2" section="test1">
+        <label key="test2"/>
+        <styleClass>custom-css-class</styleClass>
+        <link linkId="test2">http://google1.com</link>
+    </web-item>
+    <!---->
+
+    <!--Application admin page, new button in new NAMED section-->
+    <web-section key="test3" name="test3" location="admin_applications_section">
+        <label key="Custom Application Section"/>
+    </web-section>
+
+    <web-item key="test4" name="test4" section="admin_applications_section/test3" weight="10">
+        <label key="Button in section test3"/>
+        <link linkId="test4">http://google2.com</link>
+    </web-item>
+    <!---->
+
+    <!--Application admin page, new button in existed section-->
+    <!--weight-->
+    <web-item key="test5" name="test5" section="admin_applications_section/admin_applications_general_section" weight="100">
+        <label key="Button in existed section"/>
+        <link linkId="test5">http://google3.com</link>
+    </web-item>
+    <!---->
+
+    <!--Application admin page, new button in new NONAME section-->
+    <web-section key="test6" name="test6" location="admin_applications_section">
+        <label key=""/>
+    </web-section>
+
+    <web-item key="test7" name="test7" section="admin_applications_section/test6" weight="10">
+        <label key="Button in noname section"/>
+        <link linkId="test7">http://google4.com</link>
+    </web-item>
+    <!---->
+
+    <!--System admin page, new button in new section-->
+    <web-section key="test8" name="test8" location="admin_system_menu">
+        <label key="New System"/>
+    </web-section>
+
+    <web-item key="test9" name="test9" section="admin_system_menu/test8" weight="10">
+        <label key="Button in System -> New System section"/>
+        <link linkId="test9">http://google5.com</link>
+    </web-item>
+    <!---->
+
+    <!--Project admin page new button in new section-->
+    <web-section key="test10" name="test10" location="atl.jira.proj.config">
+        <label key="Custom Project Menu"/>
+    </web-section>
+
+    <web-item key="test11" name="test11" section="atl.jira.proj.config/test10" weight="10">
+        <label key="Button in Project"/>
+        <link linkId="test11">http://google6.com</link>
+    </web-item>
+    <!---->
+
+    <!--admin panel left page block-->
+    <web-panel key="test12" location="webpanels.admin.summary.left-panels">
+        <label key="Left Panel"/>
+        <resource name="view" type="static"><![CDATA[11111]]></resource>
+    </web-panel>
+    <!---->
+
+    <!--admin panel right page block-->
+    <web-panel key="test13" location="webpanels.admin.summary.right-panels">
+        <label key="Right Panel"/>
+        <resource name="view" type="static"><![CDATA[22222]]></resource>
+    </web-panel>
+    <!---->
+
+    <!--top bar Issues new button to existed section-->
+    <web-item key="test14" name="test14" section="find_link/issues_new" weight="10">
+        <label key="Test Issue"/>
+        <link>/issues/</link>
+        <tooltip key="Some tooltip"/>
+    </web-item>
+    <!---->
+
+    <!--top bar Issues new button to new section-->
+    <web-section key="test15" name="test15" location="find_link" weight="25">
+    </web-section>
+
+    <web-item key="test16" name="test16" section="find_link/test15" weight="10">
+        <label key="Sectioned Test Issue"/>
+        <link>/issues/</link>
+    </web-item>
+    <!---->
+
+    <!--top bar dropdown button-->
+    <web-item key="test17" name="test17" section="system.top.navigation.bar" weight="1000">
+        <label key="Test Submenu"/>
+        <link linkId="test17_dropdown">http://google7.com/</link>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserLoggedInCondition"/>
+    </web-item>
+
+    <web-section key="test18" name="test18" location="test17_dropdown" weight="1000"/>
+
+    <web-item key="test19" name="test19" section="test17_dropdown/test18" weight="20">
+        <label key="Submenu"/>
+        <link linkId="test19">http://google8.com/</link>
+    </web-item>
+    <!---->
+
+    <!--new user dropdown button-->
+    <web-item key="test20" name="test20" section="system.user.options/personal">
+        <label key="New Profile"/>
+        <link linkId="test20">http://google9.com/</link>
+    </web-item>
+    <!---->
+
+    <!--user hover new button-->
+    <web-item key="test21" name="test21" section="system.user.hover.links" weight="11">
+        <label key="New Profile"/>
+        <link linkId="test21">http://google10.com/</link>
+    </web-item>
+    <!---->
+
+    <!--issue new operation button-->
+    <!--weight-->
+    <web-item key="test22" name="test22" section="operations-top-level" weight="1">
+        <label key="New Action"/>
+        <link linkId="test22">http://google11.com/</link>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsFieldHiddenCondition" invert="true">
+            <param name="field">assignee</param>
+        </condition>
+    </web-item>
+    <!---->
+
+    <!--issue add to more Delete section-->
+    <web-item key="test23" name="test23" section="operations-delete" weight="1">
+        <label key="New Delete"/>
+        <link linkId="test23">http://google12.com/</link>
+        <conditions type="OR">
+            <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsFieldHiddenCondition" invert="true">
+                <param name="field">assignee</param>
+            </condition>
+            <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsFieldHiddenCondition">
+                <param name="field">assignee</param>
+            </condition>
+        </conditions>
+    </web-item>
+    <!---->
+
+    <!--issue right panel-->
+    <web-panel key="test24" name="test24" location="atl.jira.view.issue.right.context">
+        <label key="Custom Issue Panel"/>
+        <resource name="view" type="static"><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/xPQmSQKOqHc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></resource>
+    </web-panel>
+    <!---->
+
+    <!--top custom button-->
+    <web-panel key="test25" name="test25" location="com.atlassian.jira.plugin.headernav.left.context">
+        <label key="Custom Issue Panel"/>
+        <resource name="view" type="velocity" location="button.vm"/>
+    </web-panel>
+    <!---->
 </atlassian-plugin>
