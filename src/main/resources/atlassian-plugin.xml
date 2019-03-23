@@ -174,4 +174,19 @@
         <resource name="view" type="velocity" location="button.vm"/>
     </web-panel>
     <!---->
+
+    <servlet name="Test Servlet"
+             class="com.noname.plugin.TestServlet"
+             key="test-servlet">
+        <url-pattern>/test-servlet</url-pattern>
+    </servlet>
+
+    <routing key="prettyurls-key" path="/secure">
+        <route from="/TestServlet.jspa" to="/plugins/servlet/test-servlet"/>
+    </routing>
+
+    <web-resource key="test-resource" name="test-resource">
+        <resource type="download" name="test.css" location="/css/test.css"/>
+        <resource type="download" name="test.js" location="/js/test.js"/>
+    </web-resource>
 </atlassian-plugin>

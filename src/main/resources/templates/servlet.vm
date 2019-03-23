@@ -1,0 +1,16 @@
+<html>
+	<head>
+##		<meta name="decorator" content="atl.general"/>
+		<title>My Servlet</title>
+	</head>
+	<body>
+		<div>ЭТО ПОБЕДА В ХТМЛ</div>
+		<div>$myVar</div>
+		asd bla bla 123
+		<div>new div</div>
+		<div>new div $myVar</div>
+		<form method="post" action="/secure/TestServlet.jspa">
+			<input type="submit" value="Check POST"/>
+		</form>
+	</body>
+</html>
