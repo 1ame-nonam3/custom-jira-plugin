@@ -189,4 +189,12 @@
         <resource type="download" name="test.css" location="/css/test.css"/>
         <resource type="download" name="test.js" location="/js/test.js"/>
     </web-resource>
+
+    <rest key="test-rest" path="/test-rest" version="1.0">
+        <package>com.noname.plugin.v1</package>
+    </rest>
+
+    <rest key="test-rest2" path="/test-rest" version="2.0">
+        <package>com.noname.plugin.v2</package>
+    </rest>
 </atlassian-plugin>
