@@ -28,7 +28,8 @@ public class TestServlet extends HttpServlet
 		this.pageBuilderService
 				.assembler()
 				.resources()
-				.requireWebResource("custom-jira-report:test-resource");
+				.requireWebResource("custom-jira-report:test-resource")
+				.requireWebResource("custom-jira-report:test-resource2");
 
 		Map<String, Object> context = Maps.newHashMap();
 		context.put("myVar", Math.random());

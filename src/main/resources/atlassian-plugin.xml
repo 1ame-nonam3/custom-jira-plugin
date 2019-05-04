@@ -10,6 +10,8 @@
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="custom-jira-plugin"/>
 
+    <resource type="download" name="img/" location="/images"/>
+
     <!--New admin panel section and button-->
     <web-section key="test1" name="test1" location="system.admin.top.navigation.bar">
         <label key="New Admin Menu Button"/>
@@ -188,6 +190,12 @@
     <web-resource key="test-resource" name="test-resource">
         <resource type="download" name="test.css" location="/css/test.css"/>
         <resource type="download" name="test.js" location="/js/test.js"/>
+    </web-resource>
+
+    <web-resource key="test-resource2" name="test-resource2">
+        <resource type="download" name="test.css" location="/css/test.css"/>
+        <resource type="download" name="test.js" location="/js/test.js"/>
+        <!--<context>jira.view.issue</context>-->
     </web-resource>
 
     <rest key="test-rest" path="/test-rest" version="1.0">
