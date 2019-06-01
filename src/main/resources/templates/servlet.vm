@@ -9,6 +9,7 @@
 		asd bla bla 123
 		<div>new div</div>
 		<div>new div $myVar</div>
+		<div>issues in jira $ic</div>
 		<form method="post" action="/rest/test-rest/1.0/test-api/post4">
 			<input type="text" name="id"/>
 			<input type="submit" value="Check POST"/>

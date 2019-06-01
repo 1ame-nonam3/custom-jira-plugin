@@ -1,5 +1,7 @@
 package com.noname.plugin;
 
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.templaterenderer.TemplateRenderer;
 import com.atlassian.velocity.VelocityManager;
 import com.atlassian.webresource.api.assembler.PageBuilderService;
 import com.google.common.collect.Maps;
@@ -15,11 +17,17 @@ public class TestServlet extends HttpServlet
 {
 	private VelocityManager velocityManager;
 	private PageBuilderService pageBuilderService;
+	private IssueManager im;
+	private Component c;
+	private TemplateRenderer tr;
 
-	public TestServlet(VelocityManager velocityManager, PageBuilderService pageBuilderService)
+	public TestServlet(VelocityManager velocityManager, PageBuilderService pageBuilderService, IssueManager im, Component c, TemplateRenderer tr)
 	{
 		this.velocityManager = velocityManager;
 		this.pageBuilderService = pageBuilderService;
+		this.im = im;
+		this.c = c;
+		this.tr = tr;
 	}
 
 	@Override
@@ -32,7 +40,8 @@ public class TestServlet extends HttpServlet
 				.requireWebResource("custom-jira-report:test-resource2");
 
 		Map<String, Object> context = Maps.newHashMap();
-		context.put("myVar", Math.random());
+		context.put("myVar", this.c.getIssueCount());
+		context.put("ic", this.im.getIssueCount());
 
 		if ("1".equalsIgnoreCase(request.getParameter("test"))) {
 			String content = this.velocityManager.getEncodedBody("/templates/", "servlet.vm", "UTF-8", context);
