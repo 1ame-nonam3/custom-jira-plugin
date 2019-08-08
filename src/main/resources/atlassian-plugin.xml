@@ -183,8 +183,15 @@
         <url-pattern>/test-servlet</url-pattern>
     </servlet>
 
+    <servlet name="Youtube Servlet"
+             class="com.noname.plugin.youtube.servlet.YoutubeServlet"
+             key="youtube-servlet">
+        <url-pattern>/youtube-servlet</url-pattern>
+    </servlet>
+
     <routing key="prettyurls-key" path="/secure">
         <route from="/TestServlet.jspa" to="/plugins/servlet/test-servlet"/>
+        <route from="/YoutubeServlet.jspa" to="/plugins/servlet/youtube-servlet"/>
     </routing>
 
     <web-resource key="test-resource" name="test-resource">
@@ -206,6 +213,19 @@
         <package>com.noname.plugin.v2</package>
     </rest>
 
+    <rest key="youtube-rest" path="/youtube-rest" version="1.0">
+        <package>com.noname.plugin.youtube</package>
+    </rest>
+
     <component key="component" class="com.noname.plugin.Component"/>
     <component-import key="tmpRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
+    <component-import key="ao" name="Active Objects Service" interface="com.atlassian.activeobjects.external.ActiveObjects" />
+
+    <ao key="ao-module">
+        <entity>com.noname.plugin.youtube.ao.Youtubers</entity>
+        <entity>com.noname.plugin.youtube.ao.Users</entity>
+        <entity>com.noname.plugin.youtube.ao.Videos</entity>
+        <entity>com.noname.plugin.youtube.ao.Subscribers</entity>
+        <entity>com.noname.plugin.youtube.ao.NameLongerThanThirtyCharacters</entity>
+    </ao>
 </atlassian-plugin>

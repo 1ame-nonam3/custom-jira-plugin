@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<title>Это Ютуб, детка</title>
+	</head>
+	<body>
+		<script>
+			(function(window, JQ) {
+				"use strict";
+
+				JQ(document).on("click", "#add", function () {
+
+					JQ.ajax({
+						type: "post",
+						url: "/rest/youtube-rest/1.0/youtube/addYoutuber",
+						data: JQ("#youtuber-form").serialize(),
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+							alert("Request error");
+
+						},
+						success: function (data, textStatus) {
+							window.location.reload(true);
+						}
+					});
+					return false;
+
+				});
+
+				JQ(document).on("click", "#subscribe", function () {
+
+					JQ.ajax({
+						type: "post",
+						url: "/rest/youtube-rest/1.0/youtube/addSubscriber",
+						data: JQ("#subscriber-form").serialize(),
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+							alert("Request error");
+
+						},
+						success: function (data, textStatus) {
+							window.location.reload(true);
+						}
+					});
+					return false;
+
+				});
+
+				JQ(document).on("click", ".delete", function () {
+					JQ.ajax({
+						type: "post",
+						url: "/rest/youtube-rest/1.0/youtube/deleteYoutuber",
+						data: "yid=" + JQ(this).data('yid'),
+						error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+							alert("Request error");
+
+						},
+						success: function (data, textStatus) {
+							window.location.reload(true);
+						}
+					});
+					return false;
+
+				});
+
+			})(window, AJS.$);
+		</script>
+		<form id="youtuber-form" method="post" action="">
+			<table>
+				<tr>
+					<td>Youtuber name</td>
+					<td><input type="text" name="name"/></td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td><input type="text" name="description"/></td>
+				</tr>
+				<tr>
+					<td><input id="add" value="Add" type="submit"/></td>
+				</tr>
+			</table>
+		</form>
+		<form id="subscriber-form" method="post" action="">
+			<table>
+				<tr>
+					<td>Youtuber id</td>
+					<td><input type="text" name="youtuber"/></td>
+				</tr>
+				<tr>
+					<td>User id</td>
+					<td><input type="text" name="user"/></td>
+				</tr>
+				<tr>
+					<td><input id="subscribe" value="Subscribe" type="submit"/></td>
+				</tr>
+			</table>
+		</form>
+	<div>
+		#foreach($youtuber in $youtubers)
+			<table border="1">
+				<tr>
+					<td>Канал: $youtuber.getName() Подписчики($subscribers.get($youtuber.getID()))</td>
+					<td><div class="delete" data-yid="$youtuber.getID()">X</div></td>
+				</tr>
+				<tr>
+					<td>$youtuber.getDescription()</td>
+				</tr>
+				<tr>
+					<td>Videos:</td>
+					<td>
+						#foreach($video in $youtuber.getVideos())
+							<div>$video.getName() Просмотров($video.getViews())</div>
+						#end
+					</td>
+				</tr>
+			</table>
+			<div>&nbsp;</div>
+		#end
+	</div>
+	</body>
+</html>
