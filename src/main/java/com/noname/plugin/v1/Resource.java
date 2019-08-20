@@ -1,7 +1,13 @@
 package com.noname.plugin.v1;
 
+import com.atlassian.jira.ofbiz.OfBizDelegator;
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
+import com.google.common.collect.Lists;
 import com.noname.plugin.Param;
+import org.ofbiz.core.entity.EntityExpr;
+import org.ofbiz.core.entity.EntityOperator;
+import org.ofbiz.core.entity.GenericEntityException;
+import org.ofbiz.core.entity.GenericValue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
@@ -14,8 +20,42 @@ import java.util.Map;
 @Path("/test-api")
 public class Resource
 {
-	public Resource()
+	private OfBizDelegator delegator;
+
+	public Resource(OfBizDelegator delegator)
 	{
+		this.delegator = delegator;
+	}
+
+	@GET
+	@Path("/sprints")
+	public Response getSprints() throws GenericEntityException
+	{
+		List<GenericValue> values = this.delegator.findAll("Sprint");
+
+		EntityExpr c1 = new EntityExpr(
+			"id",
+			EntityOperator.EQUALS,
+			1
+		);
+		EntityExpr c2 = new EntityExpr(
+			"id",
+			EntityOperator.EQUALS,
+			3
+		);
+
+		EntityExpr c3 = new EntityExpr(
+			c1,
+			EntityOperator.OR,
+			c2
+		);
+
+		List<GenericValue> values2 = this.delegator.findByCondition("Sprint", c3, Lists.newArrayList());
+		List<GenericValue> related = values2.get(0).getRelated("ParentRapidView");
+		values2.get(0).set("name", "New Sprint Name");
+		values2.get(0).store();
+
+		return Response.ok(values.toString()).build();
 	}
 
 	@GET

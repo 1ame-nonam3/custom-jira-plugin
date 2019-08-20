@@ -1,0 +1,4 @@
+<entity-group group="default" entity="Sprint" />
+<entity-group group="default" entity="RapidView"/>
+
+<entity-group group="default" entity="MySprint"/>

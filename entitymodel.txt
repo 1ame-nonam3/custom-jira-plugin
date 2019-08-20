@@ -1,0 +1,24 @@
+<entity entity-name="Sprint" table-name="AO_60DB71_SPRINT" package-name="">
+    <field name="id" type="numeric"/>
+    <field name="name" type="long-varchar"/>
+    <field name="rapid_view_id" type="numeric"/>
+
+    <prim-key field="id"/>
+
+    <relation type="one" title="Parent" rel-entity-name="RapidView">
+        <key-map field-name="rapid_view_id" rel-field-name="id"/>
+    </relation>
+</entity>
+
+<entity entity-name="RapidView" table-name="AO_60DB71_RAPIDVIEW" package-name="">
+    <field name="id" type="numeric"/>
+    <field name="name" type="long-varchar"/>
+    <field name="owner_user_name" type="long-varchar"/>
+</entity>
+
+<entity entity-name="MySprint" table-name="MY_SPRINT" package-name="">
+    <field name="id" type="numeric"/>
+    <field name="name" type="long-varchar"/>
+
+    <prim-key field="id"/>
+</entity>
