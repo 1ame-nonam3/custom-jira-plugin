@@ -218,8 +218,11 @@
     </rest>
 
     <component key="component" class="com.noname.plugin.Component"/>
+    <component key="MyListener" class="com.noname.plugin.listener.BabkaListener"/>
+
     <component-import key="tmpRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
     <component-import key="ao" name="Active Objects Service" interface="com.atlassian.activeobjects.external.ActiveObjects" />
+    <component-import key="eventPublisher" interface="com.atlassian.event.api.EventPublisher"/>
 
     <ao key="ao-module">
         <entity>com.noname.plugin.youtube.ao.Youtubers</entity>
