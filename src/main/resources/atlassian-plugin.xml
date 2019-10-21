@@ -219,6 +219,9 @@
 
     <component key="component" class="com.noname.plugin.Component"/>
     <component key="MyListener" class="com.noname.plugin.listener.BabkaListener"/>
+    <component key="Launcher" class="com.noname.plugin.Launcher" public="true">
+		<interface>com.atlassian.sal.api.lifecycle.LifecycleAware</interface>
+	</component>
 
     <component-import key="tmpRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
     <component-import key="ao" name="Active Objects Service" interface="com.atlassian.activeobjects.external.ActiveObjects" />
