@@ -223,6 +223,13 @@
 		<interface>com.atlassian.sal.api.lifecycle.LifecycleAware</interface>
 	</component>
 
+    <component key="scomponent" class="com.noname.plugin.Service.SComponent" public="true">
+        <interface>com.noname.plugin.Service.ISComponent</interface>
+    </component>
+    <component key="SLauncher" class="com.noname.plugin.Service.SLauncher" public="true">
+        <interface>com.atlassian.sal.api.lifecycle.LifecycleAware</interface>
+    </component>
+
     <component-import key="tmpRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
     <component-import key="ao" name="Active Objects Service" interface="com.atlassian.activeobjects.external.ActiveObjects" />
     <component-import key="eventPublisher" interface="com.atlassian.event.api.EventPublisher"/>

@@ -1,0 +1,30 @@
+<testservice id="testservice">
+	<description>Test Service</description>
+	<properties>
+		<property>
+			<key>testProp</key>
+			<name>Test property</name>
+			<type>string</type>
+		</property>
+		<!--<property>-->
+			<!--<key>checkbox</key>-->
+			<!--<name>Checkbox</name>-->
+			<!--<type>checkbox</type>-->
+		<!--</property>-->
+		<!--<property>-->
+			<!--<key>long</key>-->
+			<!--<name>Long</name>-->
+			<!--<type>long</type>-->
+		<!--</property>-->
+		<!--<property>-->
+			<!--<key>date</key>-->
+			<!--<name>Date</name>-->
+			<!--<type>date</type>-->
+		<!--</property>-->
+		<!--<property>-->
+			<!--<key>user</key>-->
+			<!--<name>User</name>-->
+			<!--<type>user</type>-->
+		<!--</property>-->
+	</properties>
+</testservice>

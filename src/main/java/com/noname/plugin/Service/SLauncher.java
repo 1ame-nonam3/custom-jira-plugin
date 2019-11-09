@@ -1,11 +1,9 @@
-package com.noname.plugin;
+package com.noname.plugin.Service;
 
 import com.atlassian.event.api.EventListener;
 import com.atlassian.event.api.EventPublisher;
-import com.atlassian.plugin.event.events.PluginDisabledEvent;
+import com.atlassian.jira.service.ServiceManager;
 import com.atlassian.plugin.event.events.PluginEnabledEvent;
-import com.atlassian.plugin.event.events.PluginModuleDisabledEvent;
-import com.atlassian.plugin.event.events.PluginModuleEnabledEvent;
 import com.atlassian.sal.api.lifecycle.LifecycleAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +14,13 @@ import javax.annotation.concurrent.GuardedBy;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class Launcher implements LifecycleAware, InitializingBean, DisposableBean
+public class SLauncher implements LifecycleAware, InitializingBean, DisposableBean
 {
-	private final Logger logger = LoggerFactory.getLogger(Launcher.class);
+	private final Logger logger = LoggerFactory.getLogger(SLauncher.class);
 
 	private final EventPublisher eventPublisher;
+
+	private final ServiceManager serviceManager;
 
 	@GuardedBy("this")
 	private final Set<LifecycleEvent> lifecycleEvents = EnumSet.noneOf(LifecycleEvent.class);
@@ -37,9 +37,10 @@ public class Launcher implements LifecycleAware, InitializingBean, DisposableBea
 		LIFECYCLE_AWARE_ON_START
 	}
 
-	public Launcher(EventPublisher eventPublisher)
+	public SLauncher(ServiceManager serviceManager, EventPublisher eventPublisher)
 	{
 		this.eventPublisher = eventPublisher;
+		this.serviceManager = serviceManager;
 	}
 
 	/**
@@ -49,15 +50,8 @@ public class Launcher implements LifecycleAware, InitializingBean, DisposableBea
 	@Override
 	public void afterPropertiesSet()
 	{
-		//this.logger.error("================afterPropertiesSet================");
 		this.registerListener();
 		this.onLifecycleEvent(LifecycleEvent.AFTER_PROPERTIES_SET);
-	}
-
-	@EventListener
-	public void onPluginModuleEnabled(PluginModuleEnabledEvent event)
-	{
-		//this.logger.error("================onPluginModuleEnabled================");
 	}
 
 	/**
@@ -67,24 +61,11 @@ public class Launcher implements LifecycleAware, InitializingBean, DisposableBea
 	@EventListener
 	public void onPluginEnabled(PluginEnabledEvent event)
 	{
-		//this.logger.error("================onPluginEnabled " + event.getPlugin().getKey() + "================");
 		if ("custom-jira-report".equals(event.getPlugin().getKey())) {
 
 			this.onLifecycleEvent(LifecycleEvent.PLUGIN_ENABLED);
 
 		}
-	}
-
-	@EventListener
-	public void onPluginModuleDisabled(PluginModuleDisabledEvent event)
-	{
-		//this.logger.error("================onPluginModuleDisabled================");
-	}
-
-	@EventListener
-	public void onPluginDisabled(PluginDisabledEvent event)
-	{
-		//this.logger.error("================onPluginDisabled================");
 	}
 
 	/**
@@ -95,14 +76,12 @@ public class Launcher implements LifecycleAware, InitializingBean, DisposableBea
 	@Override
 	public void onStart()
 	{
-		//this.logger.error("================onStart================");
 		this.onLifecycleEvent(LifecycleEvent.LIFECYCLE_AWARE_ON_START);
 	}
 
 	@Override
 	public void onStop()
 	{
-		//this.logger.error("================onStop================");
 	}
 
 	/**
@@ -114,7 +93,6 @@ public class Launcher implements LifecycleAware, InitializingBean, DisposableBea
 	public void destroy()
 	{
 
-		//this.logger.error("================destroy================");
 		this.unregisterListener();
 	}
 
@@ -163,7 +141,8 @@ public class Launcher implements LifecycleAware, InitializingBean, DisposableBea
 	 */
 	private void launch()
 	{
-		//this.logger.error("Im sexy and i know it!!!!");
+		this.serviceManager.refreshAll();
+		this.logger.error("Services are refreshed");
 	}
 
 	/**
