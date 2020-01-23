@@ -1,0 +1,4 @@
+#set ($first = "Вилкой")
+#set ($second = "КЛАСС")
+#set ($parsedVar = "$first в глаз или напиши $second")
+<div>$parsedVar</div>

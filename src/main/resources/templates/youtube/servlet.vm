@@ -1,8 +1,20 @@
+#set ($title = "Это Ютуб, детка")
+#set ($type = "T")
+#set ($var = "Something")
+#set ($array = [1, 2.0, true, "cheturue"])
+#set ($map = {"key1": "val1", "key2": true})
+#set ($range = [1..20])
+#set ($parsedString = "$title Page")
+#set ($neParsedString = '$title Page')
+#set ($math = 1 + 2 * 3 / 3)
+#set ($ifVal = 22)
+
 <html>
 	<head>
-		<title>Это Ютуб, детка</title>
+		<title>$title</title>
 	</head>
 	<body>
+		<h1>${type}Grey Channel</h1>
 		<script>
 			(function(window, JQ) {
 				"use strict";
@@ -95,27 +107,88 @@
 				</tr>
 			</table>
 		</form>
-	<div>
-		#foreach($youtuber in $youtubers)
-			<table border="1">
-				<tr>
-					<td>Канал: $youtuber.getName() Подписчики($subscribers.get($youtuber.getID()))</td>
-					<td><div class="delete" data-yid="$youtuber.getID()">X</div></td>
-				</tr>
-				<tr>
-					<td>$youtuber.getDescription()</td>
-				</tr>
-				<tr>
-					<td>Videos:</td>
-					<td>
-						#foreach($video in $youtuber.getVideos())
-							<div>$video.getName() Просмотров($video.getViews())</div>
-						#end
-					</td>
-				</tr>
-			</table>
-			<div>&nbsp;</div>
+		<div>
+			#foreach($youtuber in $youtubers)
+				<table border="1">
+					<tr>
+						<td>Канал: $youtuber.getName() Подписчики($subscribers.get($youtuber.getID()))</td>
+						<td><div class="delete" data-yid="$youtuber.getID()">X</div></td>
+					</tr>
+					<tr>
+						<td>$youtuber.getDescription()</td>
+					</tr>
+					<tr>
+						<td>Videos:</td>
+						<td>
+							#foreach($video in $youtuber.getVideos())
+								<div>$video.getName() Просмотров($video.getViews())</div>
+							#end
+						</td>
+					</tr>
+				</table>
+				<div>&nbsp;</div>
+			#end
+		</div>
+
+		<script>
+			const \$var = "Very secured stroka";
+			console.log(\$var);
+		</script>
+
+		<div>Array data: $array</div>
+		<div>Array isEmpty: $array.isEmpty()</div>
+		<div>Array index: $array.get(1)</div>
+		<div>Array size: $array.size()</div>
+
+		<div>Map data: $map</div>
+		<div>Map isEmpty: $map.isEmpty()</div>
+		<div>Map index: $map.get("key1")</div>
+		<div>Map size: $map.size()</div>
+
+		<div>Range data: $range</div>
+
+		<div>Parsed string: $parsedString</div>
+
+		<div>Ne Parsed string: $neParsedString</div>
+
+		<div>$math</div>
+
+		#if ($ifVal == 1)
+				<div>ifval = 1</div>
+		#elseif ($ifVal == 2 || $ifVal == 3)
+				<div>ifVal = 2 or 3</div>
+		#else
+				<div>ifVal = wtf</div>
 		#end
-	</div>
+
+		<div>
+		#foreach($val in $range)
+			<b>$val</b>
+		#end
+		</div>
+
+		<div>
+			#foreach($key in $map.keySet())
+				($velocityCount)<b>$key</b> -> <b>$map.get($key)</b>
+			#end
+		</div>
+
+		<div>
+		#foreach($val in [1..10])
+			#if ($val == 5)
+				#break
+			#end
+			$val
+		#end
+		</div>
+
+		#include("/templates/include.vm")
+		#parse("/templates/parse.vm")
+
+		#macro( mac $user )
+			<div>Vilna kassa, podhodi $user</div>
+		#end
+
+		#mac("TGrey")
 	</body>
 </html>
